@@ -578,14 +578,11 @@ class Tooltip {
   }
 
   _fixTitle() {
-    const titleType = typeof this.element.getAttribute('data-original-title')
+    const titleAttribute = this.element.getAttribute('title')
+    const titleIsString = this.element.getAttribute('data-original-title') === 'string'
 
-    if (this.element.getAttribute('title') || titleType !== 'string') {
-      this.element.setAttribute(
-        'data-original-title',
-        this.element.getAttribute('title') || ''
-      )
-
+    if (titleAttribute || !titleIsString) {
+      this.element.setAttribute('data-original-title', titleAttribute || '')
       this.element.setAttribute('title', '')
     }
   }
